@@ -1,0 +1,7 @@
+export default function handler(req, res) {
+  res.status(200).json({
+    message: 'API working!',
+    timestamp: new Date().toISOString(),
+    test: 'SUCCESS - Vercel is deploying files correctly'
+  });
+}
