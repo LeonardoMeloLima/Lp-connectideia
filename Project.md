@@ -1,6 +1,13 @@
 # ConnectIdeia — LP Project Log
 
-**Última atualização:** 03/04/2026 (v2.2 — Admin corrigido, leads visíveis, filtros funcionando)
+**Última atualização:** 04/04/2026 (v2.3 — Globo restaurado, máscara CSS corrigida)
+
+---
+
+## 🔒 Cópia Segura
+**Commit:** `af7b197` — 04/04/2026 às 06:58 (horário local)  
+**Branch:** `main` — GitHub: `LeonardoMeloLima/Lp-connectideia`  
+**O que está funcionando:** globo animado no footer, CTA fixo, fluxo CI, admin, leads, WhatsApp
 
 ---
 
