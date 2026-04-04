@@ -21,7 +21,9 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <link href="https://cdn.prod.website-files.com/68b57ef5ef86011d9b251e8e/css/jeskojets.webflow.shared.9ff23d083.min.css" rel="stylesheet" type="text/css" integrity="sha384-n/I9CDJXceopuSyh81umUqk6XN52vaM5EkMvrnS+/4AoIRmYcEJ4WOmwaK94qaBB" crossorigin="anonymous" />
     <script type="text/javascript">
-      !function(o,c){var n=c.documentElement,t=&#34; w-mod-&#34;;n.className+=t+&#34;js&#34;,(&#34;ontouchstart&#34;in o||o.DocumentTouch&amp;&amp;c instanceof DocumentTouch)&amp;&amp;(n.className+=t+&#34;touch&#34;)}(window,document);
+      !function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);
+      // Preloader Hack: Força a duração de 1s na primeira visita (evita os 3s de delay fixo do script original)
+      if (!sessionStorage.getItem('hasVisited')) { sessionStorage.setItem('hasVisited', 'true'); }
     </script>
     <link href="./favicon.svg?v=2" rel="shortcut icon" type="image/svg+xml" />
     <link href="./favicon.svg?v=2" rel="apple-touch-icon" />
@@ -820,14 +822,14 @@
                                     <div preloader-front-over="" class="hero-w_bg_front-over">
                                         <div class="img-w">
                                             <img src="https://cdn.prod.website-files.com/68b57ef5ef86011d9b251e8e/68d9ddb4432de688d8f96eb1_img_hero-front-over.webp"
-                                                loading="eager" alt="" class="img" style="visibility:hidden" />
+                                                loading="eager" fetchpriority="high" alt="" class="img" style="visibility:hidden" />
                                         </div>
                                     </div>
                                     <div class="hero-w_bg_front">
                                         <div class="img-w">
                                             <picture>
                                                 <source media="(max-width: 768px)" srcset="./hero-9-16.png" />
-                                                <img src="./hero.png" loading="eager" alt="hero" class="img" />
+                                                <img src="./hero.png" loading="eager" fetchpriority="high" alt="hero" class="img" />
                                             </picture>
                                         </div>
                                     </div>
@@ -4141,7 +4143,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(leadData)
-            }).catch(function() {});
+            }).catch(function(e) {});
 
             // 2. Envia mensagem automática via Twilio
             var whatsappNumber = leadData.whatsapp;
@@ -4166,6 +4168,16 @@
             .then(function(data) {
                 localStorage.setItem('ciWhatsappResponse', JSON.stringify(data));
                 console.log('Resposta Twilio:', data);
+                
+                // Auto-fechar o popup após 1 segundo (conforme solicitado)
+                setTimeout(function() {
+                    var popup = document.querySelector('[pop-up="cta"]');
+                    if (popup) {
+                        popup.classList.remove('is-active');
+                        popup.style.display = 'none';
+                    }
+                }, 1000);
+                
             }).catch(function(e) {
                 localStorage.setItem('ciWhatsappError', JSON.stringify({error: e.message}));
                 console.error('Erro Twilio:', e.message);
@@ -4204,6 +4216,7 @@
                 var el = document.getElementById(id);
                 if (el) { el.classList.remove('visible'); if (id !== 'ciAnalysisNext') el.textContent = ''; }
             });
+            var progressFill = document.querySelector('.progress-fill');
             if (progressFill) progressFill.style.width = '0%';
         }
 
@@ -4225,12 +4238,81 @@
             observer.observe(popupEl, { attributes: true });
         }
 
+        // Reseta ao clicar em pop-up-close
+        document.querySelectorAll('[pop-up-close="cta"]').forEach(function(el) {
+            el.addEventListener('click', function() {
+                setTimeout(resetFlow, 500);
+            });
+        });
+
+        // ── ConnectIdeia Final Polish (SIMPLES & LEVE) ────────
+        (function() {
+            function applyFinalTweaks() {
+                // 1. Ajuste de Favicon único
+                const faviconUrl = './favicon.svg?v=2';
+                document.querySelectorAll("link[rel*='icon']").forEach(l => l.setAttribute('href', faviconUrl));
+                
+                // 2. Garante o branco no Solution Section
+                const style = document.createElement('style');
+                style.innerHTML = `[data-looping-words-list] .current { color: #ffffff !important; opacity: 1 !important; }`;
+                document.head.appendChild(style);
+            }
+            
+            if (document.readyState === 'complete') applyFinalTweaks();
+            else window.addEventListener('load', applyFinalTweaks);
+        })();
+
+    })();
+    </script>
+
+</body>
+
+            });
+            observer.observe(popupEl, { attributes: true });
+        }
+
         // Também reseta ao clicar em qualquer pop-up-close="cta"
         document.querySelectorAll('[pop-up-close="cta"]').forEach(function(el) {
             el.addEventListener('click', function() {
                 setTimeout(resetFlow, 500);
             });
         });
+
+        // ── ConnectIdeia Favicon Lockdown (SEGURANÇA TOTAL) ────────
+        (function() {
+            const faviconUrl = './favicon.svg?v=2';
+            
+            function enforceFavicon() {
+                const links = document.querySelectorAll("link[rel*='icon']");
+                links.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href !== faviconUrl) {
+                        link.setAttribute('href', faviconUrl);
+                    }
+                });
+            }
+
+            // 1. Observador de Cabeçalho: Detecta mudanças no ato (sem loop pesado)
+            const observer = new MutationObserver(() => enforceFavicon());
+            observer.observe(document.head, { childList: true, subtree: true, attributes: true });
+
+            // Chamada inicial
+            enforceFavicon();
+        })();
+
+        // ── Visual Highlight (Nossas Soluções) ────────
+        (function() {
+            // Estilo ultra-leve apenas para a cor, sem sobrecarga de GPU
+            const style = document.createElement('style');
+            style.innerHTML = `
+                [data-looping-words-list] .current {
+                    color: #ffffff !important;
+                    opacity: 1 !important;
+                    transition: color 0.3s ease, opacity 0.3s ease;
+                }
+            `;
+            document.head.appendChild(style);
+        })();
 
     })();
     </script>
