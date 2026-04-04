@@ -2005,21 +2005,17 @@
                                             class="globe-s_bot_globe-w">
                                             <div class="style-css w-embed">
                                                 <style>
+                                                    [globe-container] {
+                                                        width: 100% !important;
+                                                        height: 600px !important;
+                                                        display: block !important;
+                                                    }
                                                     .globe {
-                                                        -webkit-mask-image: url(&#39;https://cdn.prod.website-files.com/68b57ef5ef86011d9b251e8e/68d5c52dbd2b12970456244c_46836cb9ab427d00bf1e97d11516b4cd_globe-over.webp&#39;);
-                                                        mask-image: url(&#39;https://cdn.prod.website-files.com/68b57ef5ef86011d9b251e8e/68d5c52dbd2b12970456244c_46836cb9ab427d00bf1e97d11516b4cd_globe-over.webp&#39;);
-                                                        -webkit-mask-repeat: no-repeat;
-                                                        mask-repeat: no-repeat;
-
-                                                        --mask-x: 50%;
-                                                        --mask-y: 50%;
-                                                        --mask-size: 200% 200%;
-
-                                                        -webkit-mask-position: var(--mask-x) var(--mask-y);
-                                                        mask-position: var(--mask-x) var(--mask-y);
-
-                                                        -webkit-mask-size: var(--mask-size);
-                                                        mask-size: var(--mask-size);
+                                                        width: 100% !important;
+                                                        height: 600px !important;
+                                                        display: block !important;
+                                                        -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 75%);
+                                                        mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 75%);
                                                     }
                                                 </style>
                                             </div>
@@ -3314,20 +3310,55 @@
     <script src="https://cdn.jsdelivr.net/npm/globe.gl">
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            function loadjeskojets3b3a66adf5d4465ba5beb2ab02e6cf8e(e) {
-                let t = document.createElement("script");
-                t.setAttribute("src", e);
-                t.setAttribute("type", "module");
-                document.body.appendChild(t);
-            }
+      document.addEventListener("DOMContentLoaded", function () {
+    function loadjeskojets3b3a66adf5d4465ba5beb2ab02e6cf8e(e) {
+      let t = document.createElement("script");
+      t.setAttribute("src", e);
+      t.setAttribute("type", "module");
+      document.body.appendChild(t);
+    }
 
-            let src = "https://slater.app/16759.js"; //
-      //
-      //
+    let src = window.location.host.includes("webflow.io")
+      ? "https://slater.app/16759.js"
+      : "https://assets.slater.app/slater/16759.js?v=1.0";
 
-            loadjeskojets3b3a66adf5d4465ba5beb2ab02e6cf8e(src);
+    loadjeskojets3b3a66adf5d4465ba5beb2ab02e6cf8e(src);
+  });
+    </script>
+    <script>
+      // Globe fallback: initializa diretamente se o Slater não renderizou
+      setTimeout(function() {
+        var container = document.querySelector('[globe-container]');
+        if (!container || typeof Globe !== 'function') return;
+        if (container.querySelector('canvas')) return; // já foi iniciado
+        var N = 10;
+        var arcsData = Array.from({length: N}, function() {
+          return {
+            startLat: (Math.random() - 0.5) * 180,
+            startLng: (Math.random() - 0.5) * 360,
+            endLat: (Math.random() - 0.5) * 180,
+            endLng: (Math.random() - 0.5) * 360,
+            color: ['#7A716E', '#7A716E']
+          };
         });
+        var globe = Globe()(container)
+          .globeImageUrl('https://cdn.prod.website-files.com/68b57ef5ef86011d9b251e8e/68ba0382a28da03b24642636_globe-map.svg')
+          .showAtmosphere(false)
+          .backgroundColor('rgba(0,0,0,0)')
+          .width(container.offsetWidth || 600)
+          .height(container.offsetHeight || 600)
+          .arcsData(arcsData)
+          .arcColor('color')
+          .arcStroke(0.5)
+          .arcDashLength(0.6)
+          .arcDashGap(0.2)
+          .arcDashAnimateTime(8000)
+          .arcsTransitionDuration(0);
+        var mat = globe.globeMaterial && globe.globeMaterial();
+        if (mat) { mat.shininess = 0; mat.needsUpdate = true; }
+        var ctrl = globe.controls();
+        if (ctrl) { ctrl.autoRotate = true; ctrl.autoRotateSpeed = 0.5; ctrl.enableZoom = false; }
+      }, 2000);
     </script>
 
 
