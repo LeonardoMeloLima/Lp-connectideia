@@ -3,6 +3,7 @@
 <html data-wf-domain="jeskojets.com" data-wf-page="68b57ef5ef86011d9b251e8a" data-wf-site="68b57ef5ef86011d9b251e8e" lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="preload" as="image" href="./hero.jpg" />
     <title>
       ConnectIdeia
     </title>
@@ -224,8 +225,45 @@
     </style>
 
     <style>
+        /* Preloader: garante cobertura total da tela enquanto Slater não está pronto */
+        [preloader] {
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 99999 !important;
+            background: #0a0a0a !important;
+            display: flex !important;
+        }
 
+        /* DESATIVADO — regra global ocultava hero e causava lentidão percebida
         [data-prevent-flicker="true"] {
+            visibility: hidden;
+        }
+        */
+
+        /* DESATIVADO — hero/header não precisam de visibility:hidden (causa lentidão)
+        [theme][data-prevent-flicker="true"],
+        .hero-w [data-prevent-flicker="true"] {
+            visibility: hidden;
+        }
+        */
+
+        /* DESATIVADO — seletor global quebrava animações do Slater
+        [data-char-reveal="true"],
+        .hero-w [data-line-reveal="true"] {
+            visibility: hidden;
+        }
+        */
+
+        /* Abaixo do fold: mantém hidden para animações do Slater */
+        .globe-s [data-prevent-flicker="true"],
+        .jet-s [data-prevent-flicker="true"],
+        .benefits-s [data-prevent-flicker="true"] {
+            visibility: hidden;
+        }
+
+        /* Hero: esconde só os textos animados (char/line reveal) — fundo e navbar aparecem imediatamente */
+        #hero [data-char-reveal="true"],
+        #hero [data-line-reveal="true"] {
             visibility: hidden;
         }
 
@@ -829,7 +867,7 @@
                                         <div class="img-w">
                                             <picture>
                                                 <source media="(max-width: 768px)" srcset="./hero-9-16.png" />
-                                                <img src="./hero.png" loading="eager" fetchpriority="high" alt="hero" class="img" />
+                                                <img src="./hero.jpg" loading="eager" fetchpriority="high" alt="hero" class="img" />
                                             </picture>
                                         </div>
                                     </div>
@@ -3398,14 +3436,14 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js">
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.css" />
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js" defer>
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js" defer>
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/globe.gl">
+    <script src="https://cdn.jsdelivr.net/npm/globe.gl" defer>
     </script>
     <script>
-      // Overlay anti-FOUC: cobre a tela enquanto Slater não inicializa
+      /* DESATIVADO — Overlay anti-FOUC (causava lentidão no hero)
       (function() {
         var overlay = document.createElement('div');
         overlay.id = 'ci-fouc-overlay';
@@ -3417,25 +3455,44 @@
           setTimeout(function() { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 550);
         }
 
-        // Segurança: libera em até 5s de qualquer forma
         var safetyTimer = setTimeout(releaseOverlay, 5000);
         window._ciReleaseOverlay = function() {
           clearTimeout(safetyTimer);
-          setTimeout(releaseOverlay, 200); // 200ms de buffer para Slater configurar
+          setTimeout(releaseOverlay, 200);
         };
       })();
+      */
+
+      // Revela hero + header imediatamente no primeiro frame pintado
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          var heroEls = document.querySelectorAll('[theme][data-prevent-flicker="true"], .hero-w [data-prevent-flicker="true"]');
+          heroEls.forEach(function(el) { el.style.visibility = 'visible'; });
+        });
+      });
+
+      // Fallback geral: se Slater demorar mais de 3s, revela tudo que ainda estiver oculto
+      setTimeout(function() {
+        document.querySelectorAll('[data-prevent-flicker="true"]').forEach(function(el) {
+          if (getComputedStyle(el).visibility === 'hidden') {
+            el.style.visibility = 'visible';
+          }
+        });
+      }, 3000);
 
       document.addEventListener("DOMContentLoaded", function () {
         function loadjeskojets3b3a66adf5d4465ba5beb2ab02e6cf8e(e) {
           let t = document.createElement("script");
           t.setAttribute("src", e);
           t.setAttribute("type", "module");
+          /* onload/onerror do overlay — desativados junto
           t.onload = function() {
             if (typeof window._ciReleaseOverlay === 'function') window._ciReleaseOverlay();
           };
           t.onerror = function() {
             if (typeof window._ciReleaseOverlay === 'function') window._ciReleaseOverlay();
           };
+          */
           document.body.appendChild(t);
         }
 
@@ -4245,74 +4302,23 @@
             });
         });
 
-        // ── ConnectIdeia Final Polish (SIMPLES & LEVE) ────────
+        /* DESATIVADO — Final Polish da outra IA (favicon override + MutationObserver desnecessários)
         (function() {
             function applyFinalTweaks() {
                 // 1. Ajuste de Favicon único
                 const faviconUrl = './favicon.svg?v=2';
                 document.querySelectorAll("link[rel*='icon']").forEach(l => l.setAttribute('href', faviconUrl));
-                
+
                 // 2. Garante o branco no Solution Section
                 const style = document.createElement('style');
                 style.innerHTML = `[data-looping-words-list] .current { color: #ffffff !important; opacity: 1 !important; }`;
                 document.head.appendChild(style);
             }
-            
+
             if (document.readyState === 'complete') applyFinalTweaks();
             else window.addEventListener('load', applyFinalTweaks);
         })();
-
-    })();
-    </script>
-
-</body>
-
-            });
-            observer.observe(popupEl, { attributes: true });
-        }
-
-        // Também reseta ao clicar em qualquer pop-up-close="cta"
-        document.querySelectorAll('[pop-up-close="cta"]').forEach(function(el) {
-            el.addEventListener('click', function() {
-                setTimeout(resetFlow, 500);
-            });
-        });
-
-        // ── ConnectIdeia Favicon Lockdown (SEGURANÇA TOTAL) ────────
-        (function() {
-            const faviconUrl = './favicon.svg?v=2';
-            
-            function enforceFavicon() {
-                const links = document.querySelectorAll("link[rel*='icon']");
-                links.forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href !== faviconUrl) {
-                        link.setAttribute('href', faviconUrl);
-                    }
-                });
-            }
-
-            // 1. Observador de Cabeçalho: Detecta mudanças no ato (sem loop pesado)
-            const observer = new MutationObserver(() => enforceFavicon());
-            observer.observe(document.head, { childList: true, subtree: true, attributes: true });
-
-            // Chamada inicial
-            enforceFavicon();
-        })();
-
-        // ── Visual Highlight (Nossas Soluções) ────────
-        (function() {
-            // Estilo ultra-leve apenas para a cor, sem sobrecarga de GPU
-            const style = document.createElement('style');
-            style.innerHTML = `
-                [data-looping-words-list] .current {
-                    color: #ffffff !important;
-                    opacity: 1 !important;
-                    transition: color 0.3s ease, opacity 0.3s ease;
-                }
-            `;
-            document.head.appendChild(style);
-        })();
+        */
 
     })();
     </script>
