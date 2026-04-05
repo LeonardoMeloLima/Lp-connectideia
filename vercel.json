@@ -1,4 +1,7 @@
 {
   "name": "lp-connectideia",
-  "version": 2
+  "version": 2,
+  "rewrites": [
+    { "source": "/portfolio", "destination": "/portfolio.html" }
+  ]
 }

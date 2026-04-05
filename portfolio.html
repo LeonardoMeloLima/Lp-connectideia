@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html data-wf-domain="jeskojets.com" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Portfólio | ConnectIdeia</title>
+    <meta content="Conheça os aplicativos, landing pages e soluções de IA desenvolvidas pela ConnectIdeia." name="description" />
+    <meta content="Portfólio | ConnectIdeia" property="og:title" />
+    <meta content="Conheça os aplicativos, landing pages e soluções de IA desenvolvidas pela ConnectIdeia." property="og:description" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <!-- Mesmos estilos originais da ConnectIdeia -->
+    <link href="https://cdn.prod.website-files.com/68b57ef5ef86011d9b251e8e/css/jeskojets.webflow.shared.9ff23d083.min.css" rel="stylesheet" type="text/css" />
+    <link href="./favicon.svg?v=2" rel="shortcut icon" type="image/svg+xml" />
+    <link href="./favicon.svg?v=2" rel="apple-touch-icon" />
+    
+    <style>
+        /* DNA Visual ConnectIdeia - Réplica Integral "Global Section" */
+        body { 
+            background: linear-gradient(180deg, #312726 0%, #2D2423 11.79%, #292120 21.38%, #251E1D 29.12%, #211A1A 35.34%, #1D1716 40.37%, #181313 44.56%, #141010 48.24%, #100D0C 51.76%, #0C0A0A 55.44%, #090707 59.63%, #060505 64.66%, #030303 70.88%, #020101 78.62%, #000 88.21%, #000 100%);
+            background-attachment: fixed;
+            color: #ffffff; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Vinheta Cinemática (Réplica index.html) */
+        .ci-vignette {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 75% 65% at 50% 45%,
+                    transparent 0%,
+                    rgba(4,4,4,0.25) 30%,
+                    rgba(4,4,4,0.70) 55%,
+                    rgba(4,4,4,0.92) 75%,
+                    #040404 100%),
+                linear-gradient(to bottom,
+                    rgba(4,4,4,0.55) 0%,
+                    transparent 20%,
+                    transparent 38%,
+                    rgba(4,4,4,0.60) 55%,
+                    rgba(4,4,4,0.88) 70%,
+                    #040404 85%);
+        }
+        
+        .portfolio-header { 
+            padding-top: 180px; 
+            padding-bottom: 12vw; /* Escalonável para empurrar o grid pra baixo acompanhando o texto */
+            text-align: center; 
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Título Monumental (Cópia Integral do Gradiente Global com Ajuste de Luminescência) */
+        .monumental-title {
+            font-size: 12vw;
+            line-height: 0.85;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.06em;
+            margin: 0;
+            padding: 0;
+            /* Gradiente ajustado: Começa com um bronze mais vivo (#5A4B48) para visibilidade, mantendo a alma original */
+            background: linear-gradient(180deg, #5A4B48 0%, #312726 30%, #000 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 1;
+            user-select: none;
+            pointer-events: none;
+            /* Leve sombra para destacar do fundo */
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+        }
+
+        .portfolio-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 40px; 
+            padding: 40px 2.5rem 120px; /* Mais respiro no topo */
+            max-width: 1440px; 
+            margin: 0 auto; 
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Dark Glass Card (Estética Stealth + Apple visionOS) */
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            /* Sombra profunda no fundo p/ descolar da tela + Feixe de luz no topo da borda */
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Formato Panorâmico p/ LPs Wide */
+        .project-card.panoramic {
+            grid-column: span 2;
+        }
+        
+        /* Formato Vertical p/ Smartphones Apps */
+        .project-card.portrait .project-img-w {
+            aspect-ratio: 9 / 16;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+            /* Intensifica a flutuação e o brilho do vidro */
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .project-img-w { position: relative; width: 100%; aspect-ratio: 16 / 10; background: #111; overflow: hidden; }
+        .panoramic .project-img-w { aspect-ratio: 21 / 9; }
+        .project-video { width: 100%; height: 100%; object-fit: cover; opacity: 1; transition: 0.8s; }
+        .project-card:hover .project-video { transform: scale(1.04); opacity: 0.6; filter: blur(12px); }
+        
+        /* Case Study Overlay - Estratégia de PM */
+        .case-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            z-index: 5;
+        }
+        .project-card.portrait .case-overlay { padding: 30px 24px; }
+        .project-card:hover .case-overlay {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .case-step { margin-bottom: 24px; }
+        .case-step h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); margin-bottom: 8px; font-weight: 700; }
+        .case-step p { font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.9); font-weight: 400; max-width: 800px; margin: 0; }
+        
+        .case-visit { 
+            display: inline-flex; align-items: center; gap: 10px; margin-top: 10px; 
+            padding: 12px 24px; background: #fff; color: #000; border-radius: 100px; 
+            text-decoration: none; font-size: 0.8rem; font-weight: 700; transition: 0.4s;
+            width: fit-content;
+        }
+        .case-visit:hover { transform: scale(1.05); background: #f0f0f0; }
+
+        /* Marca d'água posicionada no canto */
+        .project-watermark {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            color: #ffffff;
+            font-weight: 900;
+            font-size: 1.5rem;
+            opacity: 0.15;
+            pointer-events: none;
+            letter-spacing: 0.05em;
+            z-index: 2;
+        }
+
+        .project-info { padding: 32px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .project-title { font-size: 1.8em; font-weight: 600; margin-bottom: 8px; color: #fff; letter-spacing: -0.02em; }
+        .project-desc { font-size: 1rem; line-height: 1.5; color: rgba(255,255,255,0.6); margin-bottom: 16px; }
+        .project-link { 
+            font-size: 0.85rem; 
+            color: rgba(220, 180, 150, 0.5); 
+            text-decoration: none; 
+            transition: 0.3s; 
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        .project-link:hover { color: #fff; }
+        .project-tag { 
+            display: inline-block; 
+            padding: 5px 12px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border-radius: 100px; 
+            font-size: 0.7rem; 
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-right: 8px; 
+            margin-bottom: 16px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .project-desc { color: rgba(255, 255, 255, 0.45); font-size: 0.95rem; line-height: 1.6; }
+
+        /* Custom Header p/ o Portfólio Dark */
+        .header-custom {
+            position:fixed; top:0; width:100%; z-index:1000; 
+            background: rgba(4, 4, 4, 0.4); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid { grid-template-columns: 1fr; margin-top: 0; }
+            .monumental-title { font-size: 15vw; margin-top: 40px; }
+            .portfolio-header { padding-top: 120px; }
+        }
+    </style>
+</head>
+<body class="body">
+    <div class="ci-vignette"></div>
+
+    <!-- Header / Navbar -->
+    <div class="header-custom">
+        <div class="container" style="height: 80px; display: flex; align-items: center; justify-content: space-between;">
+            <a href="/" class="link-logo w-inline-block" style="text-decoration: none;">
+                <div style="display:flex; align-items:center; font-size:26px; letter-spacing:-0.02em; font-weight:500; color:#ffffff;">
+                    ConnectIde<svg style="width:0.9em; height:0.9em; margin-left:3px;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 10 35 L 10 85 L 50 15 L 90 85 L 50 60 L 30 72.5" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="10" cy="15" r="6.5" fill="currentColor"/>
+                    </svg>
+                </div>
+            </a>
+            <div class="header_nav f-desktop">
+                <a href="/" class="nav-item-list" style="color:#ffffff; text-decoration:none; font-size:11px; font-weight:600; opacity:0.5; letter-spacing: 0.05em; text-transform: uppercase;">← Voltar para Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main style="position:relative; z-index: 2;">
+        <header class="portfolio-header">
+            <h1 class="monumental-title">Projetos</h1>
+        </header>
+
+        <section class="portfolio-grid container">
+            <!-- Projeto 1: ZERA (Panorâmico) -->
+            <div class="project-card panoramic">
+                <div class="project-img-w">
+                    <video class="project-video" autoplay muted loop playsinline>
+                        <source src="https://xmnltlazgmqqpenfxgfc.supabase.co/storage/v1/object/public/portfolio-videos/LPs/Zera.eco.br.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-watermark">ZERA</div>
+                    
+                    <!-- Camada de Estratégia (Case Detail) -->
+                    <div class="case-overlay">
+                        <div class="case-header">
+                            <div class="case-step">
+                                <h4>01. Discovery & Pesquisa</h4>
+                                <p>Análise profunda do mercado de créditos de carbono e ESG, identificando a dor latente de empresas que buscavam transparência e simplicidade na descarbonização.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>02. Delivery & Arquitetura</h4>
+                                <p>Design focado em 'Eco-Transparency', traduzindo dados complexos em dashboards intuitivos e arquitetura escalável.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>03. Planejamento de Lançamento</h4>
+                                <p>Estratégia de Go-to-Market focada em autoridade e confiança para o setor sustentável.</p>
+                            </div>
+                        </div>
+                        <a href="https://zera.eco.br" target="_blank" class="case-visit">Acesse o Projeto ↗</a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-tag">Landing Page</div>
+                        <div class="project-tag">Sustainability</div>
+                        <h3 class="project-title">ZERA</h3>
+                        <p class="project-desc">Plataforma líder em soluções sustentáveis e descarbonização, conectando tecnologia e impacto ambiental para um futuro net-zero.</p>
+                        <a href="https://zera.eco.br" target="_blank" class="project-link">www.zera.eco.br ↗</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projeto 2: Zera App (PWA Vertical) -->
+            <div class="project-card portrait">
+                <div class="project-img-w">
+                    <video class="project-video" autoplay muted loop playsinline>
+                        <source src="https://xmnltlazgmqqpenfxgfc.supabase.co/storage/v1/object/public/portfolio-videos/PWA/ZeraApp.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-watermark">ZERA APP</div>
+                    
+                    <div class="case-overlay">
+                        <div class="case-header">
+                            <div class="case-step">
+                                <h4>01. Estratégia PWA & Acesso</h4>
+                                <p>Concepção de um ecossistema Mobile-First via PWA, eliminando barreiras de download e garantindo atualizações instantâneas e performance offline para usuários globais.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>02. Arquitetura & Segurança</h4>
+                                <p>Desenvolvimento de arquitetura Multi-Tenant com isolamento absoluto de dados. Engine de cálculos complexos protegida por protocolos de segurança de nível bancário.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>03. Entrega & Valor ESG</h4>
+                                <p>Transformação de dados brutos de emissões em uma ferramenta estratégica de gestão ESG auditável, entregando confiabilidade extrema para o setor corporativo.</p>
+                            </div>
+                        </div>
+                        <a href="https://zeraapp.eco.br/" target="_blank" class="case-visit">Acesse o App ↗</a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-tag">PWA</div>
+                        <div class="project-tag">Enterprise</div>
+                        <h3 class="project-title">Zera App</h3>
+                        <p class="project-desc">A evolução da gestão sustentável na palma da mão. Sistema 'Enterprise Grade' com arquitetura robusta e segurança inegociável.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projeto 3: Personal Pro (PWA Vertical) -->
+            <div class="project-card portrait">
+                <div class="project-img-w">
+                    <video class="project-video" autoplay muted loop playsinline>
+                        <source src="https://xmnltlazgmqqpenfxgfc.supabase.co/storage/v1/object/public/portfolio-videos/PWA/Personal-Pro.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-watermark">PERSONAL PRO</div>
+                    
+                    <div class="case-overlay">
+                        <div class="case-header">
+                            <div class="case-step">
+                                <h4>01. Discovery & JTBD Strategy</h4>
+                                <p>Aplicação da metodologia Jobs to Be Done (JTBD) para mapear a jornada real do atleta e personal, identificando oportunidades de upsells estratégicos dentro do ecossistema.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>02. Design de Elite & Usabilidade</h4>
+                                <p>Interface High-Performance com visual premium, desenhada para elevar o valor percebido da marca e garantir fluidez máxima mesmo sob alta carga física.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>03. Inteligência de Mercado & LTV</h4>
+                                <p>Análise focada em diferenciação e escalabilidade, transformando o app em um ecossistema de serviços integrados que maximizam a retenção e o LTV.</p>
+                            </div>
+                        </div>
+                        <a href="#" class="case-visit">Ver App ↗</a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-tag">PWA</div>
+                        <div class="project-tag">Health</div>
+                        <h3 class="project-title">Personal Pro</h3>
+                        <p class="project-desc">Estratégia de produto e interface de elite para alta performance. Foco total em experiência do usuário e monetização inteligente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projeto 4: LP Mais Humano (Panorâmico) -->
+            <div class="project-card panoramic">
+                <div class="project-img-w">
+                    <video class="project-video" autoplay muted loop playsinline>
+                        <source src="https://xmnltlazgmqqpenfxgfc.supabase.co/storage/v1/object/public/portfolio-videos/LPs/Maishumano.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-watermark">MAIS HUMANO LP</div>
+                    
+                    <div class="case-overlay">
+                        <div class="case-header">
+                            <div class="case-step">
+                                <h4>01. Discovery & JTBD Strategy</h4>
+                                <p>Pesquisa baseada em Jobs to Be Done. Foco na entrega de valor emocional sobre funcionalidades: ajudar pais a reconstruírem uma conexão mais profunda e genuína com seus filhos.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>02. Design Acolhedor e Conversão</h4>
+                                <p>Engenharia de funil de alta conversão aliada a um 'Warm Design'. Uma interface humana e empática que quebra objeções e transmite segurança imediata ao público familiar.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>03. Entrega de Valor & Impacto</h4>
+                                <p>Arquitetura de persuasão estruturada em gatilhos comportamentais, criando um posicionamento digital que transforma visitantes com dores latentes em usuários engajados.</p>
+                            </div>
+                        </div>
+                        <a href="https://maishumano.com.br" target="_blank" class="case-visit">Acesse o Projeto ↗</a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-tag">Landing Page</div>
+                    <div class="project-tag">Emotional Design</div>
+                    <h3 class="project-title">Mais Humano (LP)</h3>
+                    <p class="project-desc">Posicionamento focado em JTBD emocional e alta conversão através de design acolhedor e empático.</p>
+                    <a href="https://www.maishumano.com.br" target="_blank" class="project-link">www.maishumano.com.br ↗</a>
+                </div>
+            </div>
+
+            <!-- Projeto 5: App Mais Humano (Vertical) -->
+            <div class="project-card portrait">
+                <div class="project-img-w">
+                    <video class="project-video" autoplay muted loop playsinline>
+                        <source src="https://xmnltlazgmqqpenfxgfc.supabase.co/storage/v1/object/public/portfolio-videos/PWA/MaisHumano.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-watermark">MAIS HUMANO APP</div>
+                    
+                    <div class="case-overlay">
+                        <div class="case-header">
+                            <div class="case-step">
+                                <h4>01. IA & Análise Comportamental</h4>
+                                <p>Integração profunda com APIs de Inteligência Artificial para mapear e analisar padrões de comportamento infantil, extraindo insights preditivos e precisos a partir de interações diárias.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>02. Psicologia Cognitiva (UX)</h4>
+                                <p>Arquitetura da experiência fundamentada na Psicologia Cognitiva. O design reduz a carga mental do usuário, traduzindo ferramentas complexas em uma interface imersiva e extremamente empática.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>03. Reporting Profissional</h4>
+                                <p>Engenharia de painéis analíticos que compilam o mapa comportamental em relatórios técnicos, entregando embasamento tangível e imediato para educadores e corpo clínico.</p>
+                            </div>
+                        </div>
+                        <a href="https://maishumano.com.br" target="_blank" class="case-visit">Acesse o Projeto ↗</a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-tag">AI / PWA</div>
+                        <div class="project-tag">Behavioral UX</div>
+                        <h3 class="project-title">Mais Humano App</h3>
+                        <p class="project-desc">Ecossistema impulsionado por IA que traduz evolução comportamental infantil em dados clínicos para educadores, sob uma UX de alto rigor cognitivo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projeto 6: App Kaishi (Vertical) -->
+            <div class="project-card portrait">
+                <div class="project-img-w">
+                    <video class="project-video" autoplay muted loop playsinline>
+                        <source src="https://xmnltlazgmqqpenfxgfc.supabase.co/storage/v1/object/public/portfolio-videos/PWA/Kaishi.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-watermark">KAISHI APP</div>
+                    
+                    <div class="case-overlay">
+                        <div class="case-header">
+                            <div class="case-step">
+                                <h4>01. Arquitetura Multi-Unidade</h4>
+                                <p>Engenharia estrutural de um hub financeiro centralizado, dimensionado para suportar o fluxo e a auditoria cruzada de uma malha com mais de 20 lojas operando simultaneamente.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>02. Governança & Hierarquia</h4>
+                                <p>Estruturação de um sólido controle acessos (RBAC). Isolamento cirúrgico de visualizações e permissões críticas entre Administradores da rede, Sócios-Investidores e Gerentes locais.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>03. BI & Reporting Unificado</h4>
+                                <p>Consolidação automatizada do fluxo de caixa global. Geração de relatórios executivos em tempo real sobre entradas e saídas, garantindo rastreabilidade absoluta para a diretoria.</p>
+                            </div>
+                        </div>
+                        <a href="https://kaishi.com.br" target="_blank" class="case-visit">Acesse o Projeto ↗</a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-tag">PWA</div>
+                        <div class="project-tag">Enterprise / FinTech</div>
+                        <h3 class="project-title">Kaishi</h3>
+                        <p class="project-desc">Hub de governança financeira corporativa para escalar redes multifranquias com total previsibilidade.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projeto 7: Fine and You LP (Panorâmico) -->
+            <div class="project-card panoramic">
+                <div class="project-img-w">
+                    <video class="project-video" autoplay muted loop playsinline>
+                        <source src="https://xmnltlazgmqqpenfxgfc.supabase.co/storage/v1/object/public/portfolio-videos/LPs/Fineandyou.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-watermark">FINE AND YOU</div>
+                    
+                    <div class="case-overlay">
+                        <div class="case-header">
+                            <div class="case-step">
+                                <h4>01. Estética Premium</h4>
+                                <p>Design desenvolvido para transparecer o alto padrão da marca, utilizando espaços negativos para criar uma experiência visual profundamente sofisticada.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>02. Hierarquia de Informação</h4>
+                                <p>Arquitetura milimetricamente desenhada para guiar o usuário direto para os calls-to-action principais, isolando ruídos e prevenindo dispersões visuais.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>03. Conversão por Design</h4>
+                                <p>Utilização estratégica de elementos tipográficos e paletas harmônicas para elevar a percepção de autoridade e impulsionar drasticamente a intenção de clique.</p>
+                            </div>
+                        </div>
+                        <a href="https://www.fineandyou.com.br" target="_blank" class="case-visit">Acesse o Projeto ↗</a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-tag">Landing Page</div>
+                    <div class="project-tag">Premium Brand</div>
+                    <h3 class="project-title">Fine and You</h3>
+                    <p class="project-desc">Experiência web minimalista e requintada, baseada em hierarquia de informação impecável e estética luxuosa.</p>
+                    <a href="https://www.fineandyou.com.br" target="_blank" class="project-link">www.fineandyou.com.br ↗</a>
+                </div>
+            </div>
+
+            <!-- Projeto 8: Imersão Fine and You (Panorâmico) -->
+            <div class="project-card panoramic">
+                <div class="project-img-w">
+                    <video class="project-video" autoplay muted loop playsinline>
+                        <source src="https://xmnltlazgmqqpenfxgfc.supabase.co/storage/v1/object/public/portfolio-videos/LPs/Imersao.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-watermark">IMERSÃO FINE&YOU</div>
+                    
+                    <div class="case-overlay">
+                        <div class="case-header">
+                            <div class="case-step">
+                                <h4>01. Foco em Alta Conversão</h4>
+                                <p>Estruturação de um funil visual implacável. A Landing Page foi desenhada primariamente para reter a atenção do lead do primeiro ao último segundo de rolagem.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>02. Direcionamento Visual</h4>
+                                <p>Aplicação refinada de hierarquia e contraste para conduzir o olho do usuário suavemente ao longo da narrativa, otimizando o fluxo de leitura.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>03. Performance Estética</h4>
+                                <p>Uma interface imersiva que alia beleza gráfica a um design limpo e responsivo, focado exclusivamente em maximizar a taxa de captura do evento.</p>
+                            </div>
+                        </div>
+                        <a href="https://imersao.fineandyou.com.br" target="_blank" class="case-visit">Acesse o Projeto ↗</a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-tag">Landing Page</div>
+                    <div class="project-tag">Launch Funnel</div>
+                    <h3 class="project-title">Imersão Fine & You</h3>
+                    <p class="project-desc">Página de captura orientada para performance pura, unindo hierarquia visual e design de alta conversão.</p>
+                    <a href="https://imersao.fineandyou.com.br" target="_blank" class="project-link">imersao.fineandyou.com.br ↗</a>
+                </div>
+            </div>
+
+            <!-- Projeto 9: Tordilha App (Vertical) -->
+            <div class="project-card portrait">
+                <div class="project-img-w">
+                    <video class="project-video" autoplay muted loop playsinline>
+                        <source src="https://xmnltlazgmqqpenfxgfc.supabase.co/storage/v1/object/public/portfolio-videos/PWA/Tordilha.mp4" type="video/mp4">
+                    </video>
+                    <div class="project-watermark">TORDILHA</div>
+                    
+                    <div class="case-overlay">
+                        <div class="case-header">
+                            <div class="case-step">
+                                <h4>01. Arquitetura de Múltiplas Jornadas</h4>
+                                <p>Mapeamento estrutural de três fluxos de experiência interconectados (Gestão, Terapeutas e Praticantes), garantindo interfaces personalizadas para a necessidade de cada perfil.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>02. Gestão de Perfis & Agendamentos</h4>
+                                <p>Engenharia de sistema robusta para um ecossistema multiusuário. Permite a gestão centralizada de agendas e o compartilhamento altamente seguro de informações clínicas e operacionais.</p>
+                            </div>
+                            <div class="case-step">
+                                <h4>03. Dados Clínicos & Evolução</h4>
+                                <p>Design de painéis analíticos que cruzam inteligentemente o desempenho do corpo de Terapeutas com métricas de evolução clínica dos praticantes de Equinoterapia.</p>
+                            </div>
+                        </div>
+                        <a href="https://tordilha.com.br" target="_blank" class="case-visit">Acesse o Projeto ↗</a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-tag">PWA</div>
+                        <div class="project-tag">HealthTech</div>
+                        <h3 class="project-title">Estância Tordilha</h3>
+                        <p class="project-desc">Plataforma dedicada à Equinoterapia. Conecta gestão, corpo clínico e pacientes através de métricas de evolução e agendamento otimizado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final Exclusivo do Portfólio (Bypass de Conversão) -->
+        <section style="padding: 140px 20px 100px; text-align: center; position: relative; z-index: 3;">
+            <div class="container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+                <p style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 24px;">PRONTO PARA SUBIR A BARRA?</p>
+                <h2 style="font-size: 3.5rem; line-height: 1.1; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 24px; color: #fff;">
+                    9 ecossistemas escalados.<br>Qual será o próximo?
+                </h2>
+                <p style="font-size: 1.15rem; color: rgba(255,255,255,0.6); margin-bottom: 48px; line-height: 1.6; max-width: 600px;">
+                    Pare de contratar execuções amadoras. Construa uma arquitetura primorosa desenhada por quem domina design, tecnologia e negócios.
+                </p>
+                <a href="https://wa.me/5519991697179" target="_blank" class="case-visit" style="font-size: 1.1rem; padding: 20px 48px; color: #000; background: #fff; border-radius: 100px; margin: 0; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+                    Agendar Reunião Estratégica
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="padding: 120px 20px; border-top: 1px solid rgba(255,255,255,0.03); text-align: center; background: #000; position: relative; z-index: 3;">
+        <div class="container">
+            <div style="display:inline-flex; align-items:center; font-size:32px; letter-spacing:-0.02em; font-weight:600; margin-bottom: 24px; background: linear-gradient(180deg, #5A4B48 0%, #312726 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                ConnectIde<svg style="width:0.9em; height:0.9em; margin-left:3px; color: #5A4B48;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 10 35 L 10 85 L 50 15 L 90 85 L 50 60 L 30 72.5" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="10" cy="15" r="6.5" fill="currentColor"/>
+                </svg>
+            </div>
+            <div style="font-size: 1rem; opacity: 1; letter-spacing: 0.12em; font-weight: 600; text-transform: uppercase; color: #ffffff;">SÃO PAULO, BRASIL</div>
+            <div style="font-size: 1.2rem; margin-top: 12px; font-weight: 400; opacity: 1; color: #ffffff;">contato@connectideia.com.br</div>
+            <div style="margin-top: 60px; font-size: 0.75rem; opacity: 0.6; font-weight: 400; letter-spacing: 0.02em; color: #ffffff;">&copy; 2026 CONNECTIDEIA. TODOS OS DIREITOS RESERVADOS.</div>
+        </div>
+    </footer>
+
+</body>
+</html>

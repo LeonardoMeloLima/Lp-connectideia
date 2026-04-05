@@ -455,6 +455,8 @@
         <a href="#hero" class="ci-nav-mobile__logo">
             ConnectIde<svg style="width:0.72em;height:0.72em;margin-left:2px;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 10 35 L 10 85 L 50 15 L 90 85 L 50 60 L 30 72.5" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="15" r="6.5" fill="currentColor"/></svg>
         </a>
+        <!-- Portfólio mobile: link discreto entre logo e CTA principal. target="_blank" para escapar do roteador Webflow -->
+        <a href="/portfolio" target="_blank" style="font-size:12px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; opacity:0.6; color:inherit; text-decoration:none;">Portfólio</a>
         <a href="#contact" class="ci-nav-mobile__cta">Analisar meu Negócio</a>
     </nav>
     <script>
@@ -528,10 +530,10 @@
                                     <a hover="nav-item" href="#o-que-fazemos" class="nav-item w-inline-block">
                                         <div class="nav-item_label">
                                             <div hover="text" class="t7 text-dark">
-                                                Criamos
+                                                O que Fazemos
                                             </div>
                                             <div hover="text" class="t7 text-dark is-2">
-                                                Criamos
+                                                O que Fazemos
                                             </div>
                                         </div>
                                         <div class="nav-item_bg">
@@ -542,10 +544,10 @@
                                     <a hover="nav-item" href="#processo" class="nav-item w-inline-block">
                                         <div class="nav-item_label">
                                             <div hover="text" class="t7 text-dark">
-                                                Processo
+                                                Como Funciona
                                             </div>
                                             <div hover="text" class="t7 text-dark is-2">
-                                                Processo
+                                                Como Funciona
                                             </div>
                                         </div>
                                         <div class="nav-item_bg">
@@ -553,7 +555,25 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a hover="nav-item" href="#processo" class="nav-item w-inline-block" style="display:none;">
+                                    <!-- 
+                                    <a hover="nav-item" href="portfolio.html" class="nav-item w-inline-block">
+                                        <div class="nav-item_label">
+                                            <div hover="text" class="t7 text-dark">
+                                                Portfólio
+                                            </div>
+                                            <div hover="text" class="t7 text-dark is-2">
+                                                Portfólio
+                                            </div>
+                                        </div>
+                                        <div class="nav-item_bg">
+                                            <div hover="bg" class="nav-item_bg_hover">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    -->
+
+                                    <!--
+                                    <a hover="nav-item" href="#produtos" class="nav-item w-inline-block">
                                         <div class="nav-item_label">
                                             <div hover="text" class="t7 text-dark">
                                                 Produtos
@@ -567,13 +587,14 @@
                                             </div>
                                         </div>
                                     </a>
+                                    -->
                                     <a hover="nav-item" href="#benefits" class="nav-item w-inline-block">
                                         <div class="nav-item_label">
                                             <div hover="text" class="t7 text-dark">
-                                                Como
+                                                Por que Nós
                                             </div>
                                             <div hover="text" class="t7 text-dark is-2">
-                                                Como
+                                                Por que Nós
                                             </div>
                                         </div>
                                         <div class="nav-item_bg">
@@ -584,10 +605,10 @@
                                     <a hover="nav-item" href="#global" class="nav-item w-inline-block">
                                         <div class="nav-item_label">
                                             <div hover="text" class="t7 text-dark">
-                                                Nossas Soluções
+                                                Soluções
                                             </div>
                                             <div hover="text" class="t7 text-dark is-2">
-                                                Nossas Soluções
+                                                Soluções
                                             </div>
                                         </div>
                                         <div class="nav-item_bg">
@@ -611,6 +632,21 @@
                             <div id="w-node-_08b01562-3862-0954-5251-f0b5079d1c00-079d1bef"
                                 class="header_cta f-desktop">
                                 <div class="nav-item-list">
+                                    <!-- Portfólio: adicionado no lado direito (header_cta) para não apertar os 4 links da esquerda. target="_blank" para escapar do roteador Webflow -->
+                                    <a hover="nav-item" href="/portfolio" target="_blank" class="nav-item w-inline-block">
+                                        <div class="nav-item_label">
+                                            <div hover="text" class="t7 text-dark">
+                                                Portfólio
+                                            </div>
+                                            <div hover="text" class="t7 text-dark is-2">
+                                                Portfólio
+                                            </div>
+                                        </div>
+                                        <div class="nav-item_bg">
+                                            <div hover="bg" class="nav-item_bg_hover">
+                                            </div>
+                                        </div>
+                                    </a>
                                     <div class="header_contact-cms w-dyn-list">
                                         <div role="list" class="header_contact-cms_list nav-item-list w-dyn-items">
 
@@ -2357,19 +2393,17 @@
                                                 </div>
                                             </div>
                                             <div class="globe-factoid-s_card_title">
-                                                <h4 class="l1">
+                                                <h4 class="l1" style="font-size: 1.4em;">
                                                     Da ideia ao Lançamento
                                                 </h4>
                                             </div>
-                                            <div class="globe-factoid-s_card_bot">
+                                            <div class="globe-factoid-s_card_bot" style="margin-top: -4rem;">
                                                 <div class="diagram-logo w-embed">
-                                                </div>
-                                                <div class="unit-12">
                                                 </div>
                                                 <div class="grid _6-columns">
                                                     <div id="w-node-_08168764-06e0-82f1-d11a-f66211702bfd-9b251e8a"
                                                         class="globe-factoid-s_card_bot_desc">
-                                                        <p class="p7">
+                                                        <p class="p6">
                                                             Enquanto outros ainda estão no planejamento, você já está vendendo. Desenvolvemos sua solução digital do zero ao ar em até 10 dias.
                                                         </p>
                                                     </div>
@@ -2489,26 +2523,16 @@
                                                     <div id="w-node-c352565d-b2fb-c2a1-6b21-33bfc39ede33-9b251e8a"
                                                         class="globe-bot-s_right_credits_title">
                                                         <div class="l1 text-base-500">
-                                                            Made by
+                                                            SÃO PAULO, BRASIL
                                                         </div>
                                                     </div>
                                                     <div id="w-node-_9d182946-800e-4614-38b5-65c0b93be0dc-9b251e8a"
                                                         class="globe-bot-s_right_credits_c">
-                                                        <div hover-trigger="link" class="credits">
-                                                            <a href="https://thefirstthelast.agency/?utm_source=jeskojets&utm_medium=article&utm_campaign=promo"
-                                                                pop-up-close="" hover="link" pop-up-open=""
-                                                                target="_blank" class="link w-inline-block">
-                                                                <div class="link_label">
-                                                                    <div hover="text" class="l1 text-base-500">
-                                                                        The First The Last
-                                                                    </div>
-                                                                    <div hover="text" class="l1 text-base-500 is-2">
-                                                                        The First The Last
-                                                                    </div>
+                                                        <div class="credits">
+                                                            <div class="link_label">
+                                                                <div class="l1 text-base-500">
+                                                                    contato@connectideia.com.br
                                                                 </div>
-                                                            </a>
-                                                            <div data-json="https://cdn.prod.website-files.com/68b57ef5ef86011d9b251e8e/68b99ba0a9bdf2b0ada6c1e5_white.json"
-                                                                class="tftl-lottie">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2560,26 +2584,16 @@
                                                 <div id="w-node-_67c7eed3-f3e4-2be2-6a17-8a79b0a66c79-9b251e8a"
                                                     class="globe-bot-s_right_credits_title">
                                                     <div class="l1 text-base-500">
-                                                        Made by
+                                                        SÃO PAULO, BRASIL
                                                     </div>
                                                 </div>
                                                 <div id="w-node-_67c7eed3-f3e4-2be2-6a17-8a79b0a66c7c-9b251e8a"
                                                     class="globe-bot-s_right_credits_c">
-                                                    <div hover-trigger="link" class="credits">
-                                                        <a href="https://thefirstthelast.agency/?utm_source=jeskojets&utm_medium=article&utm_campaign=promo"
-                                                            pop-up-close="" hover="link" pop-up-open="" target="_blank"
-                                                            class="link w-inline-block">
-                                                            <div class="link_label">
-                                                                <div hover="text" class="l1 text-base-500">
-                                                                    The First The Last
-                                                                </div>
-                                                                <div hover="text" class="l1 text-base-500 is-2">
-                                                                    The First The Last
-                                                                </div>
+                                                    <div class="credits">
+                                                        <div class="link_label">
+                                                            <div class="l1 text-base-500">
+                                                                contato@connectideia.com.br
                                                             </div>
-                                                        </a>
-                                                        <div data-json="https://pub-0b16d9d13b1345e190ead530877e618a.r2.dev/tftl-logo_white.json"
-                                                            class="tftl-lottie">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3584,63 +3598,68 @@
          ============================================= -->
     <style>
         /* Initial hidden state */
-        .svc-item {
+        /* Estado inicial — cards invisíveis */
+        #svc-grid .svc-item {
             opacity: 0;
-            transform: translateY(30px);
-            transition: transform 0.4s ease, opacity 0.4s ease;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
         }
-        /* Hover lift */
-        .svc-item:hover {
-            transform: translateY(-6px);
+        /* Classe que dispara a animação */
+        #svc-grid .svc-item.svc-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        /* Line accent on hover */
-        .svc-item:hover .svc-line .line-divider {
-            transform: scaleX(1.05);
+        /* Hover lift + brilho */
+        #svc-grid .svc-item.svc-visible:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 32px rgba(255,255,255,0.08);
+        }
+        /* Linha hover — escopo restrito ao svc-grid */
+        #svc-grid .svc-line .line-divider {
             transform-origin: left;
-            transition: transform 0.3s ease;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        #svc-grid .svc-item:hover .svc-line .line-divider {
+            opacity: 0.7;
+            transform: scaleX(1.04);
         }
     </style>
     <script>
+        // Dispara quando o preloader some — observa o atributo [preloader]
         (function() {
-            var svcAnimated = false;
-
-            // Fallback de segurança: se após 4s os cards ainda estiverem ocultos, força visível
-            setTimeout(function() {
-                if (svcAnimated) return;
-                document.querySelectorAll('#svc-grid .svc-item').forEach(function(el) {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
+            function triggerSvcCards() {
+                var items = document.querySelectorAll('#svc-grid .svc-item');
+                items.forEach(function(el, i) {
+                    setTimeout(function() {
+                        el.classList.add('svc-visible');
+                    }, i * 250);
                 });
-            }, 4000);
+            }
 
-            function initSvcCards() {
-                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-                    setTimeout(initSvcCards, 300);
-                    return;
+            var preloader = document.querySelector('[preloader]');
+            if (!preloader) { setTimeout(triggerSvcCards, 500); return; }
+
+            var triggered = false;
+            var obs = new MutationObserver(function() {
+                if (triggered) return;
+                var style = window.getComputedStyle(preloader);
+                var opacity = parseFloat(style.opacity);
+                // Detecta INÍCIO do fade (opacity < 1) — dispara durante a transição
+                if (opacity < 0.95 || style.display === 'none' || style.visibility === 'hidden') {
+                    triggered = true;
+                    obs.disconnect();
+                    setTimeout(triggerSvcCards, 200);
                 }
-                gsap.registerPlugin(ScrollTrigger);
-                svcAnimated = true;
-                gsap.fromTo('#svc-grid .svc-item',
-                    { opacity: 0, y: 30 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.8,
-                        ease: 'power2.out',
-                        stagger: 0.15,
-                        scrollTrigger: {
-                            trigger: '#svc-grid',
-                            start: 'top 80%',
-                            once: true
-                        }
-                    }
-                );
-            }
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initSvcCards);
-            } else {
-                initSvcCards();
-            }
+            });
+            obs.observe(preloader, { attributes: true, attributeFilter: ['style', 'class'] });
+
+            // Fallback: dispara após 5s de qualquer forma
+            setTimeout(function() {
+                if (triggered) return;
+                triggered = true;
+                obs.disconnect();
+                triggerSvcCards();
+            }, 5000);
         })();
     </script>
 
@@ -4321,6 +4340,41 @@
         */
 
     })();
+
+        // Restaura favicon após Slater (que usa o favicon do Jeskojets)
+        setTimeout(function() {
+            document.querySelectorAll("link[rel*='icon']").forEach(function(l) {
+                l.setAttribute('href', './favicon.svg?v=3');
+            });
+        }, 5000);
+
+        // Observer cirúrgico — só observa as tags de favicon, não o head inteiro
+        (function() {
+            var faviconUrl = './favicon.svg?v=3';
+            function fixFavicon() {
+                document.querySelectorAll("link[rel*='icon']").forEach(function(l) {
+                    if (l.getAttribute('href') !== faviconUrl) {
+                        l.setAttribute('href', faviconUrl);
+                    }
+                });
+            }
+            // Observa mudanças de atributo nas tags de favicon diretamente
+            document.querySelectorAll("link[rel*='icon']").forEach(function(l) {
+                new MutationObserver(fixFavicon).observe(l, { attributes: true, attributeFilter: ['href'] });
+            });
+            // Observa se o Slater adicionar novas tags de favicon no head
+            new MutationObserver(function(mutations) {
+                mutations.forEach(function(m) {
+                    m.addedNodes.forEach(function(node) {
+                        if (node.tagName === 'LINK' && node.rel && node.rel.includes('icon')) {
+                            fixFavicon();
+                            new MutationObserver(fixFavicon).observe(node, { attributes: true, attributeFilter: ['href'] });
+                        }
+                    });
+                });
+            }).observe(document.head, { childList: true });
+        })();
+
     </script>
 
 </body>
