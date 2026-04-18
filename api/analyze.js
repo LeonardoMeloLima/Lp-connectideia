@@ -51,7 +51,10 @@ export default async function handler(req, res) {
   if (!url) return res.status(400).json({ error: 'URL é obrigatória' });
 
   const geminiKey = process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY;
-  if (!geminiKey) return res.status(200).json({ success: true, skipped: true });
+  if (!geminiKey) {
+    console.error('[analyze.js] Erro: GEMINI_API_KEY não encontrada no ambiente.');
+    return res.status(200).json({ success: true, skipped: 'MISSING_KEY' });
+  }
 
   try {
     let finalUrl = url.trim();
@@ -59,25 +62,50 @@ export default async function handler(req, res) {
       finalUrl = 'https://' + finalUrl;
     }
 
-    console.log('[analyze.js] Scraping via Jina:', finalUrl);
+    let siteContent = '';
+    let usedPlanoB = false;
 
-    // 1. Scraping com Jina AI Reader (bypassa Cloudflare, lida com JS)
-    const jinaResponse = await fetch(`https://r.jina.ai/${finalUrl}`, {
-      headers: { 'Accept': 'text/plain', 'X-Return-Format': 'text' },
-      signal: AbortSignal.timeout(15000)
-    });
-
-    if (!jinaResponse.ok) {
-      console.log(`[analyze.js] Jina falhou: ${jinaResponse.status}`);
-      return res.status(200).json({ success: true, skipped: true });
+    // 1. Scraping com Jina AI Reader (Principal - lida bem com JS)
+    try {
+      console.log('[analyze.js] Tentando Jina AI:', finalUrl);
+      const jinaResponse = await fetch(`https://r.jina.ai/${finalUrl}`, {
+        headers: { 'Accept': 'text/plain', 'X-Return-Format': 'text' },
+        signal: AbortSignal.timeout(10000) // 10s para o Jina
+      });
+      if (jinaResponse.ok) {
+        const rawText = await jinaResponse.text();
+        siteContent = rawText.substring(0, 6000).trim();
+      }
+    } catch (e) {
+      console.warn('[analyze.js] Jina falhou ou timeout:', e.message);
     }
 
-    const rawText = await jinaResponse.text();
-    const siteContent = rawText.substring(0, 5000).trim();
-    console.log(`[analyze.js] Conteúdo obtido: ${siteContent.length} chars`);
+    // 2. Plano B: Fetch Direto + Cheerio (Caso Jina falhe ou retorne pouco conteúdo)
+    if (siteContent.length < 150) {
+      try {
+        console.log('[analyze.js] Iniciando Plano B (Cheerio):', finalUrl);
+        const directResponse = await fetch(finalUrl, { 
+          headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' },
+          signal: AbortSignal.timeout(8000) 
+        });
+        if (directResponse.ok) {
+          const html = await directResponse.text();
+          const cheerio = await import('cheerio');
+          const $ = cheerio.load(html);
+          // Limpa o HTML antes de extrair texto
+          $('script, style, nav, footer, noscript, svg, i, .menu, .nav').remove();
+          siteContent = $('body').text().replace(/\s+/g, ' ').substring(0, 4500).trim();
+          usedPlanoB = true;
+          console.log('[analyze.js] Plano B obteve:', siteContent.length, 'chars');
+        }
+      } catch (e) {
+        console.error('[analyze.js] Plano B também falhou:', e.message);
+      }
+    }
 
     if (siteContent.length < 80) {
-      return res.status(200).json({ success: true, skipped: true });
+      console.error('[analyze.js] Falha total na leitura do site.');
+      return res.status(200).json({ success: true, skipped: 'SCRAPE_FAIL' });
     }
 
     // 2. Determinando serviço ideal cruzando fase + gargalo
@@ -145,7 +173,8 @@ Regras:
     }
 
     if (!analysis || !analysis.negocio) {
-      return res.status(200).json({ success: true, skipped: true });
+      console.error('[analyze.js] Resposta da IA inválida ou vazia.');
+      return res.status(200).json({ success: true, skipped: 'LLM_FAIL' });
     }
 
     return res.status(200).json({ 
@@ -158,7 +187,7 @@ Regras:
     });
 
   } catch (err) {
-    console.error('[analyze.js] Erro:', err.message);
-    return res.status(200).json({ success: true, skipped: true });
+    console.error('[analyze.js] Erro crítico no handler:', err.message);
+    return res.status(200).json({ success: true, skipped: 'ERROR', message: err.message });
   }
 }

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+
+  <!-- Fundo com gradiente sutil -->
+  <defs>
+    <radialGradient id="bg-glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#242424"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg-glow)"/>
+
+  <!-- "ConnectIdei" texto + logo símbolo inline -->
+  <!-- Texto começa em x=294, baseline y=285. Largura estimada ~522px. Logo em x=821. -->
+  <text x="270" y="285"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="82"
+    font-weight="700"
+    fill="white"
+    text-anchor="start"
+    letter-spacing="-2">ConnectIde</text>
+
+  <!-- Logo símbolo (iA) colado após o texto -->
+  <g transform="translate(710, 210) scale(0.97)">
+    <path d="M 10 35 L 10 85 L 50 15 L 90 85 L 50 60 L 30 72.5"
+      stroke="white" stroke-width="12"
+      stroke-linecap="round" stroke-linejoin="round"
+      fill="none"/>
+    <circle cx="10" cy="15" r="6.5" fill="white"/>
+  </g>
+
+  <!-- Tagline em cinza -->
+  <text x="560" y="360"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="32"
+    font-weight="400"
+    fill="#777777"
+    text-anchor="middle"
+    letter-spacing="1">Aplicativos, Landing Pages e IA</text>
+
+  <!-- Linha separadora -->
+  <line x1="420" y1="392" x2="700" y2="392" stroke="#333333" stroke-width="1"/>
+
+  <!-- URL -->
+  <text x="560" y="430"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="24"
+    font-weight="400"
+    fill="#505050"
+    text-anchor="middle"
+    letter-spacing="2">connectideia.com.br</text>
+
+</svg>
